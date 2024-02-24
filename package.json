@@ -14,7 +14,7 @@
     "lint:biome": "biome check .",
     "lint:fix": "biome check --apply .",
     "lint:tsc": "tsc",
-    "lint": "pnpm lint:biome && pnpm lint:tsx",
+    "lint": "pnpm lint:biome && pnpm lint:tsc",
     "test": "vitest ",
     "test:cov": "vitest run --coverage",
     "document": "typedoc --out docs src/index.ts"
