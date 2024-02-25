@@ -41,7 +41,7 @@ jobs:
 
       - name: Check if the version changed
         id: version_changed
-        run: echo  name=changed=$(test "${{ steps.current_version.outputs.curr_version }}" != "${{ steps.previous_version.outputs.prev_version }}") >> $GITHUB_STATE
+        run: echo changed=$(test "${{ steps.current_version.outputs.curr_version }}" != "${{ steps.previous_version.outputs.prev_version }}") >> $GITHUB_STATE
 
       - name: Show result
-        run: echo $GITHUB_STATE
+        run: echo $changed
