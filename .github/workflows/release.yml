@@ -38,3 +38,10 @@ jobs:
       - name: Extract current version
         id: current_version
         run: echo current_version=$(node -e "console.log(require('./package.json').version)") >> $GITHUB_STATE
+
+      - name: Check if the version changed
+        id: version_changed
+        run: echo  name=changed=$(test "${{ steps.current_version.outputs.curr_version }}" != "${{ steps.previous_version.outputs.prev_version }}") >> $GITHUB_STATE
+
+      - name: Show result
+        run: echo $GITHUB_STATE
