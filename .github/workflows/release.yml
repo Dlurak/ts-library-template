@@ -33,20 +33,8 @@ jobs:
 
       - name: Extracting previous version
         id: previous_version
-        run: echo ::set-output name=prev_version::$(git describe --abbrev=0 --tags)
+        run: echo prev_version=$(git describe --abbrev=0 --tags) >> $GITHUB_STATE
 
       - name: Extract current version
         id: current_version
-        run: echo ::set-output name=curr_version::$(node -e "console.log(require('./package.json').version)")
-
-      - name: Check if version has changed
-        id: version_changed
-        run: echo ::set-output name=changed::$(test "${{ steps.current_version.outputs.curr_version }}" != "${{ steps.previous_version.outputs.prev_version }}")
-
-      - name: Print result
-        if: steps.version_changed.outputs.changed == 'true'
-        run: echo "v${{ steps.current_version.outputs.curr_version }}"
-
-      - name: Print negative result
-        if: steps.version_changed.outputs.changed == 'false'
-        run: echo "v${{ steps.current_version.outputs.curr_version }}"
+        run: echo current_version=$(node -e "console.log(require('./package.json').version)") >> $GITHUB_STATE
